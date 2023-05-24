@@ -1,6 +1,10 @@
-# Sample Helm Chart
+# Sample Development Setup with JBoss EAP and a Oracle Enterprise DataBase
 A Repo which uses the use case of a lokal environment with jboss and oracle. to show a helm chart
-
+The Development can be used as 
+* as Docker Compose Projekt
+* a Kubernetes Deployment
+* a helm chart -> WIP
+* 
 ## Build
 
 * ``docker login  registry.redhat.io``
