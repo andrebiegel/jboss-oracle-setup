@@ -4,7 +4,8 @@ The Development can be used as
 * as Docker Compose Projekt
 * a Kubernetes Deployment
 * a helm chart -> WIP
-* 
+
+The project was tested in docker Desktop!
 ## Build
 
 * ``docker login  registry.redhat.io``
