@@ -1,0 +1,11 @@
+module add --name=com.oracle.ojdbc.ojdbc8 --resources=/opt/eap/ojdbc8-19.3.0.0.jar --dependencies=javax.api,javax.transaction.api
+/subsystem=datasources/jdbc-driver=oracle:add(driver-name=oracle,driver-module-name=com.oracle.ojdbc.ojdbc8,driver-class-name=oracle.jdbc.driver.OracleDriver)
+data-source add \
+    --name=OracleDS \
+     --driver-name=oracle \
+     --connection-url=jdbc:oracle:thin:@database:6000/MYPDB \
+     --jndi-name=java:jboss/datasources/OracleDS \
+     --user-name=test_user \
+     --password=some-password
+
+jms-queue add --queue-address=testqueue --entries=["java:/jms/testqueue"]

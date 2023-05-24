@@ -1,0 +1,4 @@
+ALTER SESSION SET CONTAINER = MYPDB;
+
+CREATE USER test_user IDENTIFIED BY "some-password";
+

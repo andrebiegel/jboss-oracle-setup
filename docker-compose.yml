@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  app:
+    image: project-repo/jboss:latest
+    build: .docker/app
+    ports:
+      - "9990:9990"
+      - "8080:8080"
+    labels:
+       kompose.service.expose : "management.project.localhost,app.project.localhost"
+       kompose.service.healthhcheck.liveness.http_get_path: /health
+       kompose.service.healthhcheck.liveness.http_get_port: 9990
+  database:
+    image: project-repo/db:latest
+    build: .docker/db
+    ports:
+      - "6000:1521"
+      - "5500:5500"
+    labels:
+      kompose.service.expose : "db.project.localhost"
+    volumes:
+      - "dbdata:/opt/oracle/oradata"
+    environment:
+      - ORACLE_PWD=Manager1
+      - ORACLE_CHARACTERSET=AL32UTF8
+      - ORACLE_SID=MYCDB
+      - ORACLE_PDB=MYPDB
+      - ORACLE_EDITION=enterprise
+      - ENABLE_ARCHIVELOG=false
+      - NLS_LANG=.AL32UTF8
+    # INIT_SGA_SIZE=1536 (in MB)
+    # INIT_PGA_SIZE=2048 (in MB)
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 6g
+        reservations:
+          cpus: "1"
+          memory: 5g
+volumes:
+  dbdata:

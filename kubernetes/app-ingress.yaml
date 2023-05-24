@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.service.expose: management.project.localhost,app.project.localhost
+    kompose.service.healthhcheck.liveness.http_get_path: /health
+    kompose.service.healthhcheck.liveness.http_get_port: "9990"
+    kompose.version: 1.28.0 (c4137012e)
+    kubernetes.io/ingress.class: "nginx"
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  rules:
+    - host: management.project.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  number: 9990
+            path: /
+            pathType: Prefix
+    - host: app.project.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+status:
+  loadBalancer: {}

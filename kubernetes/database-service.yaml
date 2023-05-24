@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.service.expose: db.project.localhost
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: database
+  name: database
+spec:
+  ports:
+    - name: "6000"
+      port: 6000
+      targetPort: 1521
+    - name: "5500"
+      port: 5500
+      targetPort: 5500
+  selector:
+    io.kompose.service: database
+status:
+  loadBalancer: {}
